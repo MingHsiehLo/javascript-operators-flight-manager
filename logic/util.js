@@ -7,7 +7,25 @@ function Util() {
         return passengersArr.reduce((acc, el) => acc + el, 0);
     }
 
-    return { calculateTotalDistributedPassengers, calculateTotalNumberOfPassengers };
+    function checkInput(input) {
+        if (typeof input !== 'number' || !input) {
+            throw Error();
+        }
+    }
+
+    function calculateTotalDistance(distanceArr) {
+        return distanceArr.reduce((acc, val) => {
+            return val > 0 ? acc + val : acc + 0;
+        }, 0);
+    }
+
+    function calculateBonusPoints(businessDisArr, economyDisArr, businessBonusPercent, economyBonusPercent) {
+        const businessPoints = calculateTotalDistance(businessDisArr) * (businessBonusPercent/100);
+        const economyPoints = calculateTotalDistance(economyDisArr) * (economyBonusPercent/100);
+        return businessPoints + economyPoints;
+    }
+
+    return { calculateTotalDistributedPassengers, calculateTotalNumberOfPassengers, checkInput, calculateTotalDistance, calculateBonusPoints };
 }
 
 module.exports = Util();
